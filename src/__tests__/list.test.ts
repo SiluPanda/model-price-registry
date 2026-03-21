@@ -212,8 +212,8 @@ describe('listModels', () => {
     it('ModelSummary does not contain aliases or tiers (is a summary type)', () => {
       const models = listModels(registry);
       for (const model of models) {
-        expect((model as Record<string, unknown>)['aliases']).toBeUndefined();
-        expect((model as Record<string, unknown>)['tiers']).toBeUndefined();
+        expect((model as unknown as Record<string, unknown>)['aliases']).toBeUndefined();
+        expect((model as unknown as Record<string, unknown>)['tiers']).toBeUndefined();
       }
     });
   });

@@ -2,86 +2,86 @@
 
 ## Phase 1: Project Scaffolding and Configuration
 
-- [ ] **Install dev dependencies** -- Add `typescript`, `vitest`, and `eslint` as devDependencies in `package.json`. Run `npm install` to generate `node_modules` and `package-lock.json`. | Status: not_done
-- [ ] **Configure package.json bin field** -- Add `"bin": { "model-price-registry": "dist/cli.js" }` to `package.json` so the CLI is available after global install or via npx. | Status: not_done
-- [ ] **Update package.json files array** -- Ensure the `"files"` field includes `"dist"` so that compiled output and the bundled registry JSON are included in the published package. Verify `src/data/registry.json` ends up in `dist/data/registry.json` after build. | Status: not_done
-- [ ] **Update tsconfig.json for JSON imports** -- Confirm `"resolveJsonModule": true` is set (already present). Ensure `src/data/` directory contents are included in the build output by verifying the `include` and `rootDir` settings. | Status: not_done
-- [ ] **Create directory structure** -- Create `src/data/`, and `src/__tests__/` directories to match the spec's file structure. | Status: not_done
-- [ ] **Add ESLint configuration** -- Create a minimal ESLint config (e.g., `.eslintrc.json` or `eslint.config.js`) for TypeScript linting. Match monorepo conventions if they exist. | Status: not_done
-- [ ] **Add Vitest configuration** -- Create `vitest.config.ts` or configure Vitest in `package.json` if not already set up. Ensure it discovers `src/__tests__/*.test.ts` files. | Status: not_done
+- [x] **Install dev dependencies** -- Add `typescript`, `vitest`, and `eslint` as devDependencies in `package.json`. Run `npm install` to generate `node_modules` and `package-lock.json`. | Status: done
+- [x] **Configure package.json bin field** -- Add `"bin": { "model-price-registry": "dist/cli.js" }` to `package.json` so the CLI is available after global install or via npx. | Status: done
+- [x] **Update package.json files array** -- Ensure the `"files"` field includes `"dist"` so that compiled output and the bundled registry JSON are included in the published package. Verify `src/data/registry.json` ends up in `dist/data/registry.json` after build. | Status: done
+- [x] **Update tsconfig.json for JSON imports** -- Confirm `"resolveJsonModule": true` is set (already present). Ensure `src/data/` directory contents are included in the build output by verifying the `include` and `rootDir` settings. | Status: done
+- [x] **Create directory structure** -- Create `src/data/`, and `src/__tests__/` directories to match the spec's file structure. | Status: done
+- [x] **Add ESLint configuration** -- Create a minimal ESLint config (e.g., `.eslintrc.json` or `eslint.config.js`) for TypeScript linting. Match monorepo conventions if they exist. | Status: done
+- [x] **Add Vitest configuration** -- Create `vitest.config.ts` or configure Vitest in `package.json` if not already set up. Ensure it discovers `src/__tests__/*.test.ts` files. | Status: done
 
 ## Phase 2: TypeScript Types and Interfaces
 
-- [ ] **Create `src/types.ts` with `ModelCategory` type** -- Define the `ModelCategory` union type: `'flagship' | 'balanced' | 'fast' | 'reasoning' | 'code' | 'embedding' | 'legacy'`. | Status: not_done
-- [ ] **Create `PricingTier` interface** -- Define `PricingTier` with fields `minInputTokens: number`, `inputPerMTok: number`, `outputPerMTok: number`. | Status: not_done
-- [ ] **Create `ModelPriceData` interface** -- Define all fields: `modelId`, `displayName`, `inputPerMTok`, `outputPerMTok`, `cachedInputPerMTok?`, `contextWindow`, `maxOutputTokens?`, `effectiveDate`, `deprecated`, `deprecatedDate?`, `successor?`, `launchDate?`, `tiers?`, `category`. | Status: not_done
-- [ ] **Create `ProviderData` interface** -- Define with fields: `displayName`, `pricingUrl`, `models: Record<string, ModelPriceData>`, `aliases: Record<string, string>`. | Status: not_done
-- [ ] **Create `PriceRegistry` interface** -- Define top-level structure: `schemaVersion`, `lastUpdated`, `packageVersion`, `providers: Record<string, ProviderData>`. | Status: not_done
-- [ ] **Create `PriceEntry` interface** -- Define the return type of `getPrice`: `provider`, `modelId`, `displayName`, `inputPerMTok`, `outputPerMTok`, `cachedInputPerMTok?`, `contextWindow`, `maxOutputTokens?`, `effectiveDate`, `deprecated`, `deprecatedDate?`, `successor?`, `category`, `tiers?`. | Status: not_done
-- [ ] **Create `GetPriceOptions` interface** -- Define with optional `asOf?: string` field. | Status: not_done
-- [ ] **Create `TokenUsage` interface** -- Define with `inputTokens: number`, `outputTokens: number`, `cachedInputTokens?: number`. | Status: not_done
-- [ ] **Create `CostEstimate` interface** -- Define with `provider`, `modelId`, `inputCost`, `outputCost`, `cachedInputCost`, `totalCost`, `inputTokens`, `outputTokens`, `cachedInputTokens`, `currency: 'USD'`. | Status: not_done
-- [ ] **Create `ListModelsOptions` interface** -- Define with optional `provider?`, `category?`, `includeDeprecated?` (default true), `sortBy?: 'name' | 'inputPrice' | 'outputPrice' | 'contextWindow'`. | Status: not_done
-- [ ] **Create `ModelSummary` interface** -- Define with `provider`, `modelId`, `displayName`, `inputPerMTok`, `outputPerMTok`, `contextWindow`, `category`, `deprecated`. | Status: not_done
-- [ ] **Create `ModelInfo` interface extending `PriceEntry`** -- Add `aliases: string[]` and `launchDate?: string`. | Status: not_done
-- [ ] **Create `RegistryMetadata` interface** -- Define with `schemaVersion`, `lastUpdated`, `packageVersion`, `providerCount`, `modelCount`, `oldestEffectiveDate`, `newestEffectiveDate`. | Status: not_done
-- [ ] **Create `RegistryInstance` interface** -- Define the interface with method signatures: `getPrice`, `estimateCost`, `listProviders`, `listModels`, `getModelInfo`, `resolveModel`, `getRegistryMetadata`, `readonly registry`. | Status: not_done
-- [ ] **Export all types from `src/types.ts`** -- Ensure all interfaces and types are exported for TypeScript consumers. | Status: not_done
+- [x] **Create `src/types.ts` with `ModelCategory` type** -- Define the `ModelCategory` union type: `'flagship' | 'balanced' | 'fast' | 'reasoning' | 'code' | 'embedding' | 'legacy'`. | Status: done
+- [x] **Create `PricingTier` interface** -- Define `PricingTier` with fields `minInputTokens: number`, `inputPerMTok: number`, `outputPerMTok: number`. | Status: done
+- [x] **Create `ModelPriceData` interface** -- Define all fields: `modelId`, `displayName`, `inputPerMTok`, `outputPerMTok`, `cachedInputPerMTok?`, `contextWindow`, `maxOutputTokens?`, `effectiveDate`, `deprecated`, `deprecatedDate?`, `successor?`, `launchDate?`, `tiers?`, `category`. | Status: done
+- [x] **Create `ProviderData` interface** -- Define with fields: `displayName`, `pricingUrl`, `models: Record<string, ModelPriceData>`, `aliases: Record<string, string>`. | Status: done
+- [x] **Create `PriceRegistry` interface** -- Define top-level structure: `schemaVersion`, `lastUpdated`, `packageVersion`, `providers: Record<string, ProviderData>`. | Status: done
+- [x] **Create `PriceEntry` interface** -- Define the return type of `getPrice`: `provider`, `modelId`, `displayName`, `inputPerMTok`, `outputPerMTok`, `cachedInputPerMTok?`, `contextWindow`, `maxOutputTokens?`, `effectiveDate`, `deprecated`, `deprecatedDate?`, `successor?`, `category`, `tiers?`. | Status: done
+- [x] **Create `GetPriceOptions` interface** -- Define with optional `asOf?: string` field. | Status: done
+- [x] **Create `TokenUsage` interface** -- Define with `inputTokens: number`, `outputTokens: number`, `cachedInputTokens?: number`. | Status: done
+- [x] **Create `CostEstimate` interface** -- Define with `provider`, `modelId`, `inputCost`, `outputCost`, `cachedInputCost`, `totalCost`, `inputTokens`, `outputTokens`, `cachedInputTokens`, `currency: 'USD'`. | Status: done
+- [x] **Create `ListModelsOptions` interface** -- Define with optional `provider?`, `category?`, `includeDeprecated?` (default true), `sortBy?: 'name' | 'inputPrice' | 'outputPrice' | 'contextWindow'`. | Status: done
+- [x] **Create `ModelSummary` interface** -- Define with `provider`, `modelId`, `displayName`, `inputPerMTok`, `outputPerMTok`, `contextWindow`, `category`, `deprecated`. | Status: done
+- [x] **Create `ModelInfo` interface extending `PriceEntry`** -- Add `aliases: string[]` and `launchDate?: string`. | Status: done
+- [x] **Create `RegistryMetadata` interface** -- Define with `schemaVersion`, `lastUpdated`, `packageVersion`, `providerCount`, `modelCount`, `oldestEffectiveDate`, `newestEffectiveDate`. | Status: done
+- [x] **Create `RegistryInstance` interface** -- Define the interface with method signatures: `getPrice`, `estimateCost`, `listProviders`, `listModels`, `getModelInfo`, `resolveModel`, `getRegistryMetadata`, `readonly registry`. | Status: done
+- [x] **Export all types from `src/types.ts`** -- Ensure all interfaces and types are exported for TypeScript consumers. | Status: done
 
 ## Phase 3: Registry Data File
 
-- [ ] **Create `src/data/registry.json` with schema metadata** -- Set `schemaVersion: "1.0.0"`, `lastUpdated` to current ISO 8601 timestamp, `packageVersion` matching `package.json` version. Initialize empty `providers` object. | Status: not_done
-- [ ] **Add OpenAI provider data** -- Add all 11 OpenAI models (gpt-4o, gpt-4o-mini, gpt-4.1, gpt-4.1-mini, gpt-4.1-nano, o3, o3-mini, o4-mini, o1, gpt-4-turbo, gpt-3.5-turbo) with correct pricing, context windows, categories, and effective dates. Include `cachedInputPerMTok` where applicable. Set `displayName` and `pricingUrl`. | Status: not_done
-- [ ] **Add OpenAI aliases** -- Map `gpt-4o-2024-11-20` -> `gpt-4o`, `gpt-4.1-2025-04-14` -> `gpt-4.1`, `gpt-4.1-nano-2025-04-14` -> `gpt-4.1-nano`, `gpt-4.1-mini-2025-04-14` -> `gpt-4.1-mini`, `chatgpt-4o-latest` -> `gpt-4o`, `o3-2025-04-16` -> `o3`. | Status: not_done
-- [ ] **Add Anthropic provider data** -- Add all 6 Anthropic models (claude-opus-4, claude-sonnet-4, claude-sonnet-4-5, claude-haiku-3-5, claude-opus-3-5, claude-sonnet-3-5) with correct pricing, context windows, categories, and cached input pricing. | Status: not_done
-- [ ] **Add Anthropic pricing tiers** -- Add 2x long-context pricing tiers for claude-sonnet-4-5 (input $6.00, output $30.00 above 200K) and claude-opus-4 (input $30.00, output $150.00 above 200K). Set `minInputTokens: 200000` for each tier. | Status: not_done
-- [ ] **Add Anthropic aliases** -- Map `claude-sonnet-4-5-20250514` -> `claude-sonnet-4-5`, `claude-3-5-haiku-20241022` -> `claude-haiku-3-5`, `claude-opus-4-20250514` -> `claude-opus-4`. | Status: not_done
-- [ ] **Add Google provider data** -- Add all 5 Google models (gemini-2.5-pro, gemini-2.5-flash, gemini-2.0-flash, gemini-1.5-pro, gemini-1.5-flash) with correct pricing, context windows, categories, and cached input pricing. Mark gemini-2.0-flash as deprecated with `successor: 'gemini-2.5-flash'` and a `deprecatedDate`. | Status: not_done
-- [ ] **Add Google pricing tiers** -- Add 2x long-context pricing tiers for gemini-2.5-pro (input $2.50, output $20.00 above 200K) and gemini-2.5-flash (input $0.30, output $1.20 above 200K). | Status: not_done
-- [ ] **Add Google aliases** -- Map `gemini-2.5-pro-preview-05-06` -> `gemini-2.5-pro`, `gemini-2.5-flash-preview-04-17` -> `gemini-2.5-flash`, `gemini-2.0-flash-001` -> `gemini-2.0-flash`. | Status: not_done
-- [ ] **Add Meta provider data** -- Add all 5 Meta models (llama-4-maverick, llama-4-scout, llama-3.3-70b, llama-3.1-405b, llama-3.1-8b) with representative hosted pricing. No cached input pricing. Include context windows and categories per spec. | Status: not_done
-- [ ] **Add Mistral provider data** -- Add all 6 Mistral models (mistral-large, mistral-medium-3, mistral-small, codestral, mistral-nemo, pixtral-large) with correct pricing, context windows, and categories. | Status: not_done
-- [ ] **Add Mistral aliases** -- Map `mistral-large-latest` -> `mistral-large`, `mistral-medium-latest` -> `mistral-medium-3`, `mistral-small-latest` -> `mistral-small`. | Status: not_done
-- [ ] **Add Cohere provider data** -- Add all 7 Cohere models (command-r-plus, command-r, command-r7b, command-light, embed-english-v3, embed-multilingual-v3, rerank-english-v3) with correct pricing. Handle embedding models that have no `outputPerMTok` (set to 0 or omit per implementation). | Status: not_done
-- [ ] **Add Cohere aliases** -- Map `command-r-plus-08-2024` -> `command-r-plus`, `command-r-08-2024` -> `command-r`. | Status: not_done
-- [ ] **Create `src/data/registry.schema.json`** -- Write a JSON Schema that validates the structure of `registry.json`, including required fields, types, enum constraints for `ModelCategory`, and format constraints for date strings. | Status: not_done
+- [x] **Create `src/data/registry.json` with schema metadata** -- Set `schemaVersion: "1.0.0"`, `lastUpdated` to current ISO 8601 timestamp, `packageVersion` matching `package.json` version. Initialize empty `providers` object. | Status: done
+- [x] **Add OpenAI provider data** -- Add all 11 OpenAI models (gpt-4o, gpt-4o-mini, gpt-4.1, gpt-4.1-mini, gpt-4.1-nano, o3, o3-mini, o4-mini, o1, gpt-4-turbo, gpt-3.5-turbo) with correct pricing, context windows, categories, and effective dates. Include `cachedInputPerMTok` where applicable. Set `displayName` and `pricingUrl`. | Status: done
+- [x] **Add OpenAI aliases** -- Map `gpt-4o-2024-11-20` -> `gpt-4o`, `gpt-4.1-2025-04-14` -> `gpt-4.1`, `gpt-4.1-nano-2025-04-14` -> `gpt-4.1-nano`, `gpt-4.1-mini-2025-04-14` -> `gpt-4.1-mini`, `chatgpt-4o-latest` -> `gpt-4o`, `o3-2025-04-16` -> `o3`. | Status: done
+- [x] **Add Anthropic provider data** -- Add all 6 Anthropic models (claude-opus-4, claude-sonnet-4, claude-sonnet-4-5, claude-haiku-3-5, claude-opus-3-5, claude-sonnet-3-5) with correct pricing, context windows, categories, and cached input pricing. | Status: done
+- [x] **Add Anthropic pricing tiers** -- Add 2x long-context pricing tiers for claude-sonnet-4-5 (input $6.00, output $30.00 above 200K) and claude-opus-4 (input $30.00, output $150.00 above 200K). Set `minInputTokens: 200000` for each tier. | Status: done
+- [x] **Add Anthropic aliases** -- Map `claude-sonnet-4-5-20250514` -> `claude-sonnet-4-5`, `claude-3-5-haiku-20241022` -> `claude-haiku-3-5`, `claude-opus-4-20250514` -> `claude-opus-4`. | Status: done
+- [x] **Add Google provider data** -- Add all 5 Google models (gemini-2.5-pro, gemini-2.5-flash, gemini-2.0-flash, gemini-1.5-pro, gemini-1.5-flash) with correct pricing, context windows, categories, and cached input pricing. Mark gemini-2.0-flash as deprecated with `successor: 'gemini-2.5-flash'` and a `deprecatedDate`. | Status: done
+- [x] **Add Google pricing tiers** -- Add 2x long-context pricing tiers for gemini-2.5-pro (input $2.50, output $20.00 above 200K) and gemini-2.5-flash (input $0.30, output $1.20 above 200K). | Status: done
+- [x] **Add Google aliases** -- Map `gemini-2.5-pro-preview-05-06` -> `gemini-2.5-pro`, `gemini-2.5-flash-preview-04-17` -> `gemini-2.5-flash`, `gemini-2.0-flash-001` -> `gemini-2.0-flash`. | Status: done
+- [x] **Add Meta provider data** -- Add all 5 Meta models (llama-4-maverick, llama-4-scout, llama-3.3-70b, llama-3.1-405b, llama-3.1-8b) with representative hosted pricing. No cached input pricing. Include context windows and categories per spec. | Status: done
+- [x] **Add Mistral provider data** -- Add all 6 Mistral models (mistral-large, mistral-medium-3, mistral-small, codestral, mistral-nemo, pixtral-large) with correct pricing, context windows, and categories. | Status: done
+- [x] **Add Mistral aliases** -- Map `mistral-large-latest` -> `mistral-large`, `mistral-medium-latest` -> `mistral-medium-3`, `mistral-small-latest` -> `mistral-small`. | Status: done
+- [x] **Add Cohere provider data** -- Add all 7 Cohere models (command-r-plus, command-r, command-r7b, command-light, embed-english-v3, embed-multilingual-v3, rerank-english-v3) with correct pricing. Handle embedding models that have no `outputPerMTok` (set to 0 or omit per implementation). | Status: done
+- [x] **Add Cohere aliases** -- Map `command-r-plus-08-2024` -> `command-r-plus`, `command-r-08-2024` -> `command-r`. | Status: done
+- [x] **Create `src/data/registry.schema.json`** -- Write a JSON Schema that validates the structure of `registry.json`, including required fields, types, enum constraints for `ModelCategory`, and format constraints for date strings. | Status: done
 
 ## Phase 4: Core API Implementation
 
 ### 4a: Registry Instance and Data Loading
 
-- [ ] **Create `src/registry.ts` with data loading** -- Implement loading of `src/data/registry.json` at import time via `require()`. Freeze the parsed data with `Object.freeze` (deep freeze the registry object). | Status: not_done
-- [ ] **Implement `createRegistry` factory function** -- Accept a `PriceRegistry` data object and return a `RegistryInstance` with all API methods bound to that data. This enables custom registry instances. | Status: not_done
-- [ ] **Implement default registry instance** -- Create a default `RegistryInstance` from the bundled `registry.json` data. Export its methods as the top-level API. | Status: not_done
+- [x] **Create `src/registry.ts` with data loading** -- Implement loading of `src/data/registry.json` at import time via `require()`. Freeze the parsed data with `Object.freeze` (deep freeze the registry object). | Status: done
+- [x] **Implement `createRegistry` factory function** -- Accept a `PriceRegistry` data object and return a `RegistryInstance` with all API methods bound to that data. This enables custom registry instances. | Status: done
+- [x] **Implement default registry instance** -- Create a default `RegistryInstance` from the bundled `registry.json` data. Export its methods as the top-level API. | Status: done
 
 ### 4b: Lookup Functions
 
-- [ ] **Create `src/lookup.ts` with `resolveModel`** -- Implement alias resolution: given a provider and model string, check if it exists as a canonical model ID; if not, check the provider's aliases map and return the canonical ID. Normalize input to lowercase. Return `undefined` if not found. | Status: not_done
-- [ ] **Implement `getPrice` in `src/lookup.ts`** -- Look up a provider and model, resolve aliases, construct and return a `PriceEntry` object. Normalize provider and model to lowercase. Return `undefined` if provider or model not found. | Status: not_done
-- [ ] **Implement `asOf` option in `getPrice`** -- When `options.asOf` is provided, return the pricing entry whose `effectiveDate` is the most recent date on or before `asOf`. Return `undefined` if no entry exists before that date. (Note: v1 registry has one entry per model; this lays groundwork for future historical data.) | Status: not_done
-- [ ] **Implement `getModelInfo` in `src/lookup.ts`** -- Return a `ModelInfo` object (extends `PriceEntry`) with the `aliases` array populated by reverse-looking up the provider's alias map, plus the `launchDate` field. | Status: not_done
+- [x] **Create `src/lookup.ts` with `resolveModel`** -- Implement alias resolution: given a provider and model string, check if it exists as a canonical model ID; if not, check the provider's aliases map and return the canonical ID. Normalize input to lowercase. Return `undefined` if not found. | Status: done
+- [x] **Implement `getPrice` in `src/lookup.ts`** -- Look up a provider and model, resolve aliases, construct and return a `PriceEntry` object. Normalize provider and model to lowercase. Return `undefined` if provider or model not found. | Status: done
+- [x] **Implement `asOf` option in `getPrice`** -- When `options.asOf` is provided, return the pricing entry whose `effectiveDate` is the most recent date on or before `asOf`. Return `undefined` if no entry exists before that date. (Note: v1 registry has one entry per model; this lays groundwork for future historical data.) | Status: done
+- [x] **Implement `getModelInfo` in `src/lookup.ts`** -- Return a `ModelInfo` object (extends `PriceEntry`) with the `aliases` array populated by reverse-looking up the provider's alias map, plus the `launchDate` field. | Status: done
 
 ### 4c: Cost Estimation
 
-- [ ] **Create `src/estimate.ts` with `estimateCost`** -- Implement cost calculation: look up pricing via `getPrice`, compute `inputCost`, `outputCost`, `cachedInputCost`, and `totalCost`. Return `undefined` if model not found. | Status: not_done
-- [ ] **Implement tiered pricing in `estimateCost`** -- When the model has `tiers` and `inputTokens` exceeds a tier's `minInputTokens`, use the highest applicable tier's pricing for the entire input (not split billing). | Status: not_done
-- [ ] **Implement cached input token fallback** -- When `cachedInputTokens` is provided but the model has no `cachedInputPerMTok`, bill cached tokens at the full input rate. | Status: not_done
-- [ ] **Implement 6-decimal-place rounding** -- Round all cost values using `Math.round(value * 1_000_000) / 1_000_000` to avoid floating-point artifacts. | Status: not_done
+- [x] **Create `src/estimate.ts` with `estimateCost`** -- Implement cost calculation: look up pricing via `getPrice`, compute `inputCost`, `outputCost`, `cachedInputCost`, and `totalCost`. Return `undefined` if model not found. | Status: done
+- [x] **Implement tiered pricing in `estimateCost`** -- When the model has `tiers` and `inputTokens` exceeds a tier's `minInputTokens`, use the highest applicable tier's pricing for the entire input (not split billing). | Status: done
+- [x] **Implement cached input token fallback** -- When `cachedInputTokens` is provided but the model has no `cachedInputPerMTok`, bill cached tokens at the full input rate. | Status: done
+- [x] **Implement 6-decimal-place rounding** -- Round all cost values using `Math.round(value * 1_000_000) / 1_000_000` to avoid floating-point artifacts. | Status: done
 
 ### 4d: List Functions
 
-- [ ] **Create `src/list.ts` with `listProviders`** -- Return an array of all provider ID strings from the registry. | Status: not_done
-- [ ] **Implement `listModels` in `src/list.ts`** -- Return `ModelSummary[]` for all models. Support filtering by `provider`, `category`, and `includeDeprecated` (default `true`). | Status: not_done
-- [ ] **Implement sorting in `listModels`** -- Support `sortBy` option: `'name'` (alphabetical by modelId, default), `'inputPrice'` (ascending), `'outputPrice'` (ascending), `'contextWindow'` (ascending). | Status: not_done
-- [ ] **Handle unknown provider in `listModels`** -- Return an empty array if the specified provider does not exist in the registry. | Status: not_done
+- [x] **Create `src/list.ts` with `listProviders`** -- Return an array of all provider ID strings from the registry. | Status: done
+- [x] **Implement `listModels` in `src/list.ts`** -- Return `ModelSummary[]` for all models. Support filtering by `provider`, `category`, and `includeDeprecated` (default `true`). | Status: done
+- [x] **Implement sorting in `listModels`** -- Support `sortBy` option: `'name'` (alphabetical by modelId, default), `'inputPrice'` (ascending), `'outputPrice'` (ascending), `'contextWindow'` (ascending). | Status: done
+- [x] **Handle unknown provider in `listModels`** -- Return an empty array if the specified provider does not exist in the registry. | Status: done
 
 ### 4e: Metadata
 
-- [ ] **Create `src/metadata.ts` with `getRegistryMetadata`** -- Compute and return `RegistryMetadata`: count providers, count total models across all providers, find oldest and newest `effectiveDate` values, include `schemaVersion`, `lastUpdated`, and `packageVersion` from the registry data. | Status: not_done
+- [x] **Create `src/metadata.ts` with `getRegistryMetadata`** -- Compute and return `RegistryMetadata`: count providers, count total models across all providers, find oldest and newest `effectiveDate` values, include `schemaVersion`, `lastUpdated`, and `packageVersion` from the registry data. | Status: done
 
 ### 4f: Public Exports
 
-- [ ] **Update `src/index.ts` with all public exports** -- Export `getPrice`, `estimateCost`, `listProviders`, `listModels`, `getModelInfo`, `resolveModel`, `getRegistryMetadata`, `createRegistry`, and `registry` (the frozen data object). Also export all type interfaces. | Status: not_done
+- [x] **Update `src/index.ts` with all public exports** -- Export `getPrice`, `estimateCost`, `listProviders`, `listModels`, `getModelInfo`, `resolveModel`, `getRegistryMetadata`, `createRegistry`, and `registry` (the frozen data object). Also export all type interfaces. | Status: done
 
 ## Phase 5: CLI Implementation
 
