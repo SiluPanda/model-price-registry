@@ -143,6 +143,100 @@ Create a custom registry instance from your own pricing data.
 function createRegistry(data: PriceRegistry): RegistryInstance;
 ```
 
+## CLI
+
+Install globally or use `npx`:
+
+```bash
+npm install -g model-price-registry
+# or
+npx model-price-registry --help
+```
+
+### Commands
+
+#### `price <provider> <model>`
+
+Show input/output price per 1M tokens for a model.
+
+```bash
+model-price-registry price openai gpt-4o
+# Provider  : openai
+# Model     : gpt-4o (GPT-4o)
+# Input/1M  : $2.50
+# Output/1M : $10.00
+# Cached/1M : $1.25
+```
+
+#### `estimate <provider> <model> --input <n> --output <n> [--cached <n>]`
+
+Estimate the cost for a given token usage.
+
+```bash
+model-price-registry estimate anthropic claude-sonnet-4-5 --input 50000 --output 5000
+# Provider      : anthropic
+# Model         : claude-sonnet-4-5
+# Input tokens  : 50,000
+# Output tokens : 5,000
+# Input cost    : $0.15
+# Output cost   : $0.075
+# ─────────────────────────────
+# Total cost    : $0.225
+```
+
+#### `list [--provider <name>] [--sort cost|name]`
+
+List all models in a table. Optionally filter by provider or sort by input price.
+
+```bash
+model-price-registry list --provider openai --sort cost
+```
+
+#### `providers`
+
+List all available provider IDs.
+
+```bash
+model-price-registry providers
+# Available providers:
+#   openai
+#   anthropic
+#   google
+#   meta
+#   mistral
+#   cohere
+```
+
+#### `info <provider> <model>`
+
+Show full model information including aliases, pricing tiers, context window, and deprecation status.
+
+```bash
+model-price-registry info anthropic claude-sonnet-4-5
+```
+
+### Flags
+
+| Flag | Description |
+|---|---|
+| `--format json\|human` | Output format. Default: `human`. Overrides `MODEL_PRICE_REGISTRY_FORMAT` env var. |
+| `--help`, `-h` | Show help text. |
+| `--version`, `-v` | Show package version. |
+
+### Environment variables
+
+| Variable | Description |
+|---|---|
+| `MODEL_PRICE_REGISTRY_FORMAT` | Set to `json` or `human` to control default output format. |
+
+### Exit codes
+
+| Code | Meaning |
+|---|---|
+| `0` | Success |
+| `1` | Model or provider not found |
+| `2` | Usage error (missing arguments, invalid flags) |
+
 ## Types
 
 The following types are exported for TypeScript consumers:

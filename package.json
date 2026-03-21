@@ -1,9 +1,12 @@
 {
   "name": "model-price-registry",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Auto-updating registry of LLM pricing across providers",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "model-price-registry": "dist/cli.js"
+  },
   "files": [
     "dist"
   ],
