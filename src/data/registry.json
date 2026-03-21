@@ -1,0 +1,521 @@
+{
+  "schemaVersion": "1.0.0",
+  "lastUpdated": "2026-03-21T00:00:00Z",
+  "packageVersion": "0.1.0",
+  "providers": {
+    "openai": {
+      "displayName": "OpenAI",
+      "pricingUrl": "https://openai.com/pricing",
+      "models": {
+        "gpt-4o": {
+          "modelId": "gpt-4o",
+          "displayName": "GPT-4o",
+          "inputPerMTok": 2.50,
+          "outputPerMTok": 10.00,
+          "cachedInputPerMTok": 1.25,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "flagship"
+        },
+        "gpt-4o-mini": {
+          "modelId": "gpt-4o-mini",
+          "displayName": "GPT-4o mini",
+          "inputPerMTok": 0.15,
+          "outputPerMTok": 0.60,
+          "cachedInputPerMTok": 0.075,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "fast"
+        },
+        "gpt-4.1": {
+          "modelId": "gpt-4.1",
+          "displayName": "GPT-4.1",
+          "inputPerMTok": 2.00,
+          "outputPerMTok": 8.00,
+          "cachedInputPerMTok": 1.00,
+          "contextWindow": 1000000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "flagship"
+        },
+        "gpt-4.1-mini": {
+          "modelId": "gpt-4.1-mini",
+          "displayName": "GPT-4.1 mini",
+          "inputPerMTok": 0.40,
+          "outputPerMTok": 1.60,
+          "cachedInputPerMTok": 0.20,
+          "contextWindow": 1000000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "balanced"
+        },
+        "gpt-4.1-nano": {
+          "modelId": "gpt-4.1-nano",
+          "displayName": "GPT-4.1 nano",
+          "inputPerMTok": 0.10,
+          "outputPerMTok": 0.40,
+          "cachedInputPerMTok": 0.05,
+          "contextWindow": 1000000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "fast"
+        },
+        "o3": {
+          "modelId": "o3",
+          "displayName": "o3",
+          "inputPerMTok": 2.00,
+          "outputPerMTok": 8.00,
+          "cachedInputPerMTok": 1.00,
+          "contextWindow": 200000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "reasoning"
+        },
+        "o3-mini": {
+          "modelId": "o3-mini",
+          "displayName": "o3-mini",
+          "inputPerMTok": 1.10,
+          "outputPerMTok": 4.40,
+          "cachedInputPerMTok": 0.55,
+          "contextWindow": 200000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "reasoning"
+        },
+        "o4-mini": {
+          "modelId": "o4-mini",
+          "displayName": "o4-mini",
+          "inputPerMTok": 1.10,
+          "outputPerMTok": 4.40,
+          "cachedInputPerMTok": 0.55,
+          "contextWindow": 200000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "reasoning"
+        },
+        "o1": {
+          "modelId": "o1",
+          "displayName": "o1",
+          "inputPerMTok": 15.00,
+          "outputPerMTok": 60.00,
+          "cachedInputPerMTok": 7.50,
+          "contextWindow": 200000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "reasoning"
+        },
+        "gpt-4-turbo": {
+          "modelId": "gpt-4-turbo",
+          "displayName": "GPT-4 Turbo",
+          "inputPerMTok": 10.00,
+          "outputPerMTok": 30.00,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "legacy"
+        },
+        "gpt-3.5-turbo": {
+          "modelId": "gpt-3.5-turbo",
+          "displayName": "GPT-3.5 Turbo",
+          "inputPerMTok": 0.50,
+          "outputPerMTok": 1.50,
+          "contextWindow": 16000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "legacy"
+        }
+      },
+      "aliases": {
+        "gpt-4o-2024-11-20": "gpt-4o",
+        "gpt-4.1-2025-04-14": "gpt-4.1",
+        "gpt-4.1-nano-2025-04-14": "gpt-4.1-nano",
+        "gpt-4.1-mini-2025-04-14": "gpt-4.1-mini",
+        "chatgpt-4o-latest": "gpt-4o",
+        "o3-2025-04-16": "o3"
+      }
+    },
+    "anthropic": {
+      "displayName": "Anthropic",
+      "pricingUrl": "https://www.anthropic.com/pricing",
+      "models": {
+        "claude-opus-4": {
+          "modelId": "claude-opus-4",
+          "displayName": "Claude Opus 4",
+          "inputPerMTok": 15.00,
+          "outputPerMTok": 75.00,
+          "cachedInputPerMTok": 1.50,
+          "contextWindow": 200000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "flagship",
+          "tiers": [
+            {
+              "minInputTokens": 200000,
+              "inputPerMTok": 30.00,
+              "outputPerMTok": 150.00
+            }
+          ]
+        },
+        "claude-sonnet-4": {
+          "modelId": "claude-sonnet-4",
+          "displayName": "Claude Sonnet 4",
+          "inputPerMTok": 3.00,
+          "outputPerMTok": 15.00,
+          "cachedInputPerMTok": 0.30,
+          "contextWindow": 200000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "balanced"
+        },
+        "claude-sonnet-4-5": {
+          "modelId": "claude-sonnet-4-5",
+          "displayName": "Claude Sonnet 4.5",
+          "inputPerMTok": 3.00,
+          "outputPerMTok": 15.00,
+          "cachedInputPerMTok": 0.30,
+          "contextWindow": 200000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "balanced",
+          "tiers": [
+            {
+              "minInputTokens": 200000,
+              "inputPerMTok": 6.00,
+              "outputPerMTok": 30.00
+            }
+          ]
+        },
+        "claude-haiku-3-5": {
+          "modelId": "claude-haiku-3-5",
+          "displayName": "Claude Haiku 3.5",
+          "inputPerMTok": 0.80,
+          "outputPerMTok": 4.00,
+          "cachedInputPerMTok": 0.08,
+          "contextWindow": 200000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "fast"
+        },
+        "claude-opus-3-5": {
+          "modelId": "claude-opus-3-5",
+          "displayName": "Claude Opus 3.5",
+          "inputPerMTok": 15.00,
+          "outputPerMTok": 75.00,
+          "cachedInputPerMTok": 1.50,
+          "contextWindow": 200000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "legacy"
+        },
+        "claude-sonnet-3-5": {
+          "modelId": "claude-sonnet-3-5",
+          "displayName": "Claude Sonnet 3.5",
+          "inputPerMTok": 3.00,
+          "outputPerMTok": 15.00,
+          "cachedInputPerMTok": 0.30,
+          "contextWindow": 200000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "legacy"
+        }
+      },
+      "aliases": {
+        "claude-sonnet-4-5-20250514": "claude-sonnet-4-5",
+        "claude-3-5-haiku-20241022": "claude-haiku-3-5",
+        "claude-opus-4-20250514": "claude-opus-4"
+      }
+    },
+    "google": {
+      "displayName": "Google",
+      "pricingUrl": "https://ai.google.dev/pricing",
+      "models": {
+        "gemini-2.5-pro": {
+          "modelId": "gemini-2.5-pro",
+          "displayName": "Gemini 2.5 Pro",
+          "inputPerMTok": 1.25,
+          "outputPerMTok": 10.00,
+          "cachedInputPerMTok": 0.3125,
+          "contextWindow": 1000000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "flagship",
+          "tiers": [
+            {
+              "minInputTokens": 200000,
+              "inputPerMTok": 2.50,
+              "outputPerMTok": 20.00
+            }
+          ]
+        },
+        "gemini-2.5-flash": {
+          "modelId": "gemini-2.5-flash",
+          "displayName": "Gemini 2.5 Flash",
+          "inputPerMTok": 0.15,
+          "outputPerMTok": 0.60,
+          "cachedInputPerMTok": 0.0375,
+          "contextWindow": 1000000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "balanced",
+          "tiers": [
+            {
+              "minInputTokens": 200000,
+              "inputPerMTok": 0.30,
+              "outputPerMTok": 1.20
+            }
+          ]
+        },
+        "gemini-2.0-flash": {
+          "modelId": "gemini-2.0-flash",
+          "displayName": "Gemini 2.0 Flash",
+          "inputPerMTok": 0.10,
+          "outputPerMTok": 0.40,
+          "cachedInputPerMTok": 0.025,
+          "contextWindow": 1000000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": true,
+          "deprecatedDate": "2026-01-15",
+          "successor": "gemini-2.5-flash",
+          "category": "fast"
+        },
+        "gemini-1.5-pro": {
+          "modelId": "gemini-1.5-pro",
+          "displayName": "Gemini 1.5 Pro",
+          "inputPerMTok": 1.25,
+          "outputPerMTok": 5.00,
+          "cachedInputPerMTok": 0.3125,
+          "contextWindow": 2000000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "legacy"
+        },
+        "gemini-1.5-flash": {
+          "modelId": "gemini-1.5-flash",
+          "displayName": "Gemini 1.5 Flash",
+          "inputPerMTok": 0.075,
+          "outputPerMTok": 0.30,
+          "cachedInputPerMTok": 0.01875,
+          "contextWindow": 1000000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "legacy"
+        }
+      },
+      "aliases": {
+        "gemini-2.5-pro-preview-05-06": "gemini-2.5-pro",
+        "gemini-2.5-flash-preview-04-17": "gemini-2.5-flash",
+        "gemini-2.0-flash-001": "gemini-2.0-flash"
+      }
+    },
+    "meta": {
+      "displayName": "Meta",
+      "pricingUrl": "https://llama.meta.com/",
+      "models": {
+        "llama-4-maverick": {
+          "modelId": "llama-4-maverick",
+          "displayName": "Llama 4 Maverick",
+          "inputPerMTok": 0.15,
+          "outputPerMTok": 0.60,
+          "contextWindow": 1000000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "flagship"
+        },
+        "llama-4-scout": {
+          "modelId": "llama-4-scout",
+          "displayName": "Llama 4 Scout",
+          "inputPerMTok": 0.11,
+          "outputPerMTok": 0.34,
+          "contextWindow": 512000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "balanced"
+        },
+        "llama-3.3-70b": {
+          "modelId": "llama-3.3-70b",
+          "displayName": "Llama 3.3 70B",
+          "inputPerMTok": 0.18,
+          "outputPerMTok": 0.18,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "legacy"
+        },
+        "llama-3.1-405b": {
+          "modelId": "llama-3.1-405b",
+          "displayName": "Llama 3.1 405B",
+          "inputPerMTok": 1.00,
+          "outputPerMTok": 1.00,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "legacy"
+        },
+        "llama-3.1-8b": {
+          "modelId": "llama-3.1-8b",
+          "displayName": "Llama 3.1 8B",
+          "inputPerMTok": 0.05,
+          "outputPerMTok": 0.05,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "fast"
+        }
+      },
+      "aliases": {}
+    },
+    "mistral": {
+      "displayName": "Mistral AI",
+      "pricingUrl": "https://mistral.ai/pricing",
+      "models": {
+        "mistral-large": {
+          "modelId": "mistral-large",
+          "displayName": "Mistral Large",
+          "inputPerMTok": 2.00,
+          "outputPerMTok": 6.00,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "flagship"
+        },
+        "mistral-medium-3": {
+          "modelId": "mistral-medium-3",
+          "displayName": "Mistral Medium 3",
+          "inputPerMTok": 0.40,
+          "outputPerMTok": 2.00,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "balanced"
+        },
+        "mistral-small": {
+          "modelId": "mistral-small",
+          "displayName": "Mistral Small",
+          "inputPerMTok": 0.10,
+          "outputPerMTok": 0.30,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "fast"
+        },
+        "codestral": {
+          "modelId": "codestral",
+          "displayName": "Codestral",
+          "inputPerMTok": 0.30,
+          "outputPerMTok": 0.90,
+          "contextWindow": 256000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "code"
+        },
+        "mistral-nemo": {
+          "modelId": "mistral-nemo",
+          "displayName": "Mistral Nemo",
+          "inputPerMTok": 0.02,
+          "outputPerMTok": 0.02,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "fast"
+        },
+        "pixtral-large": {
+          "modelId": "pixtral-large",
+          "displayName": "Pixtral Large",
+          "inputPerMTok": 2.00,
+          "outputPerMTok": 6.00,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "flagship"
+        }
+      },
+      "aliases": {
+        "mistral-large-latest": "mistral-large",
+        "mistral-medium-latest": "mistral-medium-3",
+        "mistral-small-latest": "mistral-small"
+      }
+    },
+    "cohere": {
+      "displayName": "Cohere",
+      "pricingUrl": "https://cohere.com/pricing",
+      "models": {
+        "command-r-plus": {
+          "modelId": "command-r-plus",
+          "displayName": "Command R+",
+          "inputPerMTok": 2.50,
+          "outputPerMTok": 10.00,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "flagship"
+        },
+        "command-r": {
+          "modelId": "command-r",
+          "displayName": "Command R",
+          "inputPerMTok": 0.15,
+          "outputPerMTok": 0.60,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "balanced"
+        },
+        "command-r7b": {
+          "modelId": "command-r7b",
+          "displayName": "Command R 7B",
+          "inputPerMTok": 0.0375,
+          "outputPerMTok": 0.15,
+          "contextWindow": 128000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "fast"
+        },
+        "command-light": {
+          "modelId": "command-light",
+          "displayName": "Command Light",
+          "inputPerMTok": 0.30,
+          "outputPerMTok": 0.60,
+          "contextWindow": 4000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "legacy"
+        },
+        "embed-english-v3": {
+          "modelId": "embed-english-v3",
+          "displayName": "Embed English v3",
+          "inputPerMTok": 0.10,
+          "outputPerMTok": 0,
+          "contextWindow": 512,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "embedding"
+        },
+        "embed-multilingual-v3": {
+          "modelId": "embed-multilingual-v3",
+          "displayName": "Embed Multilingual v3",
+          "inputPerMTok": 0.10,
+          "outputPerMTok": 0,
+          "contextWindow": 512,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "embedding"
+        },
+        "rerank-english-v3": {
+          "modelId": "rerank-english-v3",
+          "displayName": "Rerank English v3",
+          "inputPerMTok": 2.00,
+          "outputPerMTok": 0,
+          "contextWindow": 4000,
+          "effectiveDate": "2025-03-01",
+          "deprecated": false,
+          "category": "embedding"
+        }
+      },
+      "aliases": {
+        "command-r-plus-08-2024": "command-r-plus",
+        "command-r-08-2024": "command-r"
+      }
+    }
+  }
+}
