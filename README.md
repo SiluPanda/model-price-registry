@@ -3,6 +3,7 @@
 Queryable registry of LLM pricing across all major providers -- zero runtime dependencies, sub-millisecond lookups, updated weekly.
 
 [![npm version](https://img.shields.io/npm/v/model-price-registry.svg)](https://www.npmjs.com/package/model-price-registry)
+[![npm downloads](https://img.shields.io/npm/dt/model-price-registry.svg)](https://www.npmjs.com/package/model-price-registry)
 [![license](https://img.shields.io/npm/l/model-price-registry.svg)](https://github.com/SiluPanda/model-price-registry/blob/master/LICENSE)
 [![node](https://img.shields.io/node/v/model-price-registry.svg)](https://nodejs.org/)
 
