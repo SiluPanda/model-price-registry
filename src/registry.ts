@@ -24,19 +24,20 @@ function deepFreeze<T extends object>(obj: T): T {
 const frozenRegistry: PriceRegistry = deepFreeze(registryData as unknown as PriceRegistry);
 
 export function createRegistry(data: PriceRegistry): RegistryInstance {
+  const frozen = deepFreeze(data);
   return {
     getPrice: (provider: string, model: string, options?: GetPriceOptions) =>
-      getPrice(data, provider, model, options),
+      getPrice(frozen, provider, model, options),
     estimateCost: (provider: string, model: string, usage: TokenUsage) =>
-      estimateCost(data, provider, model, usage),
-    listProviders: () => listProviders(data),
-    listModels: (options?: ListModelsOptions) => listModels(data, options),
+      estimateCost(frozen, provider, model, usage),
+    listProviders: () => listProviders(frozen),
+    listModels: (options?: ListModelsOptions) => listModels(frozen, options),
     getModelInfo: (provider: string, model: string) =>
-      getModelInfo(data, provider, model),
+      getModelInfo(frozen, provider, model),
     resolveModel: (provider: string, modelOrAlias: string) =>
-      resolveModel(data, provider, modelOrAlias),
-    getRegistryMetadata: () => getRegistryMetadata(data),
-    registry: data,
+      resolveModel(frozen, provider, modelOrAlias),
+    getRegistryMetadata: () => getRegistryMetadata(frozen),
+    registry: frozen,
   };
 }
 

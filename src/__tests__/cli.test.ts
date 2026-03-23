@@ -73,6 +73,22 @@ describe('parseArgs', () => {
     const result = parseArgs(['list', '--sort', 'cost']);
     expect(result.flags['sort']).toBe('cost');
   });
+
+  it('parses --key=value syntax', () => {
+    const result = parseArgs(['list', '--format=json']);
+    expect(result.flags['format']).toBe('json');
+  });
+
+  it('parses --key=value with equals in value', () => {
+    const result = parseArgs(['list', '--filter=key=val']);
+    expect(result.flags['filter']).toBe('key=val');
+  });
+
+  it('parses mixed --key value and --key=value syntax', () => {
+    const result = parseArgs(['estimate', 'openai', 'gpt-4o', '--input=1000', '--output', '500']);
+    expect(result.flags['input']).toBe('1000');
+    expect(result.flags['output']).toBe('500');
+  });
 });
 
 // ─── cmdPrice ────────────────────────────────────────────────────────────────
@@ -458,6 +474,15 @@ describe('main', () => {
   it('--format json flag is passed through to commands', () => {
     const { stdout, code } = capture((out, err) =>
       main(['price', 'openai', 'gpt-4o', '--format', 'json'], out, err),
+    );
+    expect(code).toBe(0);
+    const parsed = JSON.parse(stdout.join(''));
+    expect(parsed.modelId).toBe('gpt-4o');
+  });
+
+  it('--format=json (equals syntax) is passed through to commands', () => {
+    const { stdout, code } = capture((out, err) =>
+      main(['price', 'openai', 'gpt-4o', '--format=json'], out, err),
     );
     expect(code).toBe(0);
     const parsed = JSON.parse(stdout.join(''));

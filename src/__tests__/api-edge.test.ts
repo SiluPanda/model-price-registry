@@ -207,4 +207,47 @@ describe('registry immutability', () => {
   it('registry export is frozen', () => {
     expect(Object.isFrozen(registry)).toBe(true);
   });
+
+  it('nested provider objects are deeply frozen', () => {
+    for (const providerData of Object.values(registry.providers)) {
+      expect(Object.isFrozen(providerData)).toBe(true);
+      expect(Object.isFrozen(providerData.models)).toBe(true);
+      expect(Object.isFrozen(providerData.aliases)).toBe(true);
+      for (const modelData of Object.values(providerData.models)) {
+        expect(Object.isFrozen(modelData)).toBe(true);
+      }
+    }
+  });
+
+  it('createRegistry freezes user-provided data', () => {
+    const mutableData = {
+      schemaVersion: '1.0.0',
+      lastUpdated: '2024-01-01T00:00:00Z',
+      packageVersion: '0.0.1',
+      providers: {
+        'test-prov': {
+          displayName: 'Test',
+          pricingUrl: 'https://test.com',
+          models: {
+            'test-model': {
+              modelId: 'test-model',
+              displayName: 'Test',
+              inputPerMTok: 1.0,
+              outputPerMTok: 2.0,
+              contextWindow: 4096,
+              effectiveDate: '2024-01-01',
+              deprecated: false,
+              category: 'fast' as const,
+            },
+          },
+          aliases: {},
+        },
+      },
+    };
+    const custom = createRegistry(mutableData);
+    // The returned registry should be frozen
+    expect(Object.isFrozen(custom.registry)).toBe(true);
+    expect(Object.isFrozen(custom.registry.providers['test-prov'])).toBe(true);
+    expect(Object.isFrozen(custom.registry.providers['test-prov'].models['test-model'])).toBe(true);
+  });
 });
