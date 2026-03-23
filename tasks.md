@@ -88,25 +88,25 @@
 - [x] **Create `src/cli.ts` entry point** -- Add shebang line `#!/usr/bin/env node`. Parse CLI arguments using `node:util` `parseArgs`. Route to command handlers based on first positional argument. | Status: done
 - [x] **Implement `price` command** -- Parse `<provider> <model>` positional args. Call `getPrice`. Print human-readable pricing output matching the spec format (Provider, Model, Category, Input, Output, Cached, Context, Effective, Status). Support `--format json` to output raw JSON. | Status: done
 - [x] **Implement `estimate` command** -- Parse `<provider> <model>` positional args plus `--input`, `--output`, `--cached` flags. Call `estimateCost`. Print human-readable cost breakdown matching the spec format. Support `--format json`. | Status: done
-- [ ] **Implement `list` command** -- Support `--provider`, `--category`, `--no-deprecated`, `--sort`, `--format` flags. Call `listModels` with the appropriate options. Print a formatted table (human) or JSON array. | Status: not_done
-- [ ] **Implement `providers` command** -- Call `listProviders` and for each provider, display: provider ID, display name, model count, pricing URL. Print summary line with total providers and models. Support `--format json`. | Status: not_done
-- [ ] **Implement `info` command** -- Call `getRegistryMetadata`. Print schema version, last updated, provider count, model count, oldest effective date, newest effective date. Support `--format json`. | Status: not_done
+- [ ] **Implement `list` command** -- Support `--provider`, `--category`, `--no-deprecated`, `--sort`, `--format` flags. Call `listModels` with the appropriate options. Print a formatted table (human) or JSON array. | Status: done
+- [ ] **Implement `providers` command** -- Call `listProviders` and for each provider, display: provider ID, display name, model count, pricing URL. Print summary line with total providers and models. Support `--format json`. | Status: done
+- [ ] **Implement `info` command** -- Call `getRegistryMetadata`. Print schema version, last updated, provider count, model count, oldest effective date, newest effective date. Support `--format json`. | Status: done
 - [x] **Implement `--help` flag** -- Display usage information with available commands and flags. | Status: done
 - [x] **Implement `--version` flag** -- Display the package version from `package.json`. | Status: done
 - [x] **Implement exit codes** -- Exit 0 on success, 1 when model/provider not found, 2 on configuration errors (invalid flags, missing required args). | Status: done
 - [x] **Implement `MODEL_PRICE_REGISTRY_FORMAT` environment variable** -- Read `MODEL_PRICE_REGISTRY_FORMAT` env var as default for `--format`. Explicit `--format` flag overrides the env var. | Status: done
-- [ ] **Handle version header in CLI output** -- All human-readable CLI output should include a header line like `model-price-registry v{version}` matching the spec examples. | Status: not_done
-- [ ] **Format context window values for display** -- Display context windows as human-readable values: `128K`, `200K`, `1M`, `2M` etc. rather than raw numbers. | Status: not_done
+- [ ] **Handle version header in CLI output** -- All human-readable CLI output should include a header line like `model-price-registry v{version}` matching the spec examples. | Status: done
+- [ ] **Format context window values for display** -- Display context windows as human-readable values: `128K`, `200K`, `1M`, `2M` etc. rather than raw numbers. | Status: done
 
 ## Phase 6: Unit Tests
 
 ### 6a: `getPrice` Tests
 
-- [ ] **Test `getPrice` returns valid `PriceEntry` for every model** -- Iterate all providers and models in the registry and assert each returns a non-undefined `PriceEntry` with all required fields. | Status: not_done
+- [x] **Test `getPrice` returns valid `PriceEntry` for every model** -- Iterate all providers and models in the registry and assert each returns a non-undefined `PriceEntry` with all required fields. | Status: done
 - [x] **Test `getPrice` returns `undefined` for unknown provider** -- Call `getPrice('nonexistent', 'gpt-4o')` and assert result is `undefined`. | Status: done
 - [x] **Test `getPrice` returns `undefined` for unknown model** -- Call `getPrice('openai', 'nonexistent-model')` and assert result is `undefined`. | Status: done
 - [x] **Test `getPrice` resolves aliases** -- Call `getPrice('openai', 'chatgpt-4o-latest')` and assert it returns the same entry as `getPrice('openai', 'gpt-4o')`. Test multiple aliases across providers. | Status: done
-- [ ] **Test `getPrice` is case-insensitive** -- Call `getPrice('OpenAI', 'GPT-4o')` and assert it returns a valid entry. | Status: not_done
+- [x] **Test `getPrice` is case-insensitive** -- Call `getPrice('OpenAI', 'GPT-4o')` and assert it returns a valid entry. | Status: done
 - [x] **Test `getPrice` with `asOf` option** -- Call with an `asOf` date and verify correct pricing is returned. Test with a date before the model's effective date returns `undefined`. | Status: done
 - [x] **Test `getPrice` returns correct field values for a known model** -- Assert specific pricing values for a known model (e.g., `gpt-4o`: inputPerMTok=2.50, outputPerMTok=10.00, cachedInputPerMTok=1.25, contextWindow=128000). | Status: done
 
@@ -116,7 +116,7 @@
 - [x] **Test `estimateCost` handles zero input tokens** -- Pass `inputTokens: 0` and assert `inputCost` is 0, `totalCost` equals `outputCost`. | Status: done
 - [x] **Test `estimateCost` handles zero output tokens** -- Pass `outputTokens: 0` and assert `outputCost` is 0, `totalCost` equals `inputCost`. | Status: done
 - [x] **Test `estimateCost` handles cached input tokens** -- Pass `cachedInputTokens` for a model that supports it and assert `cachedInputCost` uses the cached rate. | Status: done
-- [ ] **Test `estimateCost` cached token fallback** -- Pass `cachedInputTokens` for a model without `cachedInputPerMTok` and assert cached tokens are billed at the full input rate. | Status: not_done
+- [x] **Test `estimateCost` cached token fallback** -- Pass `cachedInputTokens` for a model without `cachedInputPerMTok` and assert cached tokens are billed at the full input rate. | Status: done
 - [x] **Test `estimateCost` returns `undefined` for unknown model** -- Assert result is `undefined` for a non-existent model. | Status: done
 - [x] **Test `estimateCost` rounds to 6 decimal places** -- Verify that results do not have floating-point noise beyond 6 decimal places. | Status: done
 - [x] **Test `estimateCost` applies tiered pricing above threshold** -- For gemini-2.5-pro with `inputTokens: 300000`, assert the tiered rate ($2.50/MTok) is used, not the base rate ($1.25/MTok). | Status: done
@@ -136,9 +136,9 @@
 - [x] **Test `listModels` filters by category** -- Call with `{ category: 'reasoning' }` and assert all returned models have `category: 'reasoning'`. | Status: done
 - [x] **Test `listModels` excludes deprecated models** -- Call with `{ includeDeprecated: false }` and assert no returned model has `deprecated: true`. | Status: done
 - [x] **Test `listModels` sorts by inputPrice** -- Call with `{ sortBy: 'inputPrice' }` and assert models are in ascending `inputPerMTok` order. | Status: done
-- [ ] **Test `listModels` returns empty array for unknown provider** -- Call with `{ provider: 'nonexistent' }` and assert result is `[]`. | Status: not_done
+- [x] **Test `listModels` returns empty array for unknown provider** -- Call with `{ provider: 'nonexistent' }` and assert result is `[]`. | Status: done
 - [x] **Test `listModels` sorts by name by default** -- Call with no `sortBy` and assert models are sorted alphabetically by `modelId`. | Status: done
-- [ ] **Test `listModels` sorts by outputPrice** -- Call with `{ sortBy: 'outputPrice' }` and verify ascending order. | Status: not_done
+- [x] **Test `listModels` sorts by outputPrice** -- Call with `{ sortBy: 'outputPrice' }` and verify ascending order. | Status: done
 - [x] **Test `listModels` sorts by contextWindow** -- Call with `{ sortBy: 'contextWindow' }` and verify ascending order. | Status: done
 
 ### 6e: `getModelInfo` Tests
@@ -152,40 +152,40 @@
 - [x] **Test `resolveModel` resolves known aliases** -- Call with known alias strings and assert the canonical model ID is returned. | Status: done
 - [x] **Test `resolveModel` returns canonical ID for canonical input** -- Call with a canonical model ID and assert the same ID is returned. | Status: done
 - [x] **Test `resolveModel` returns `undefined` for unknown alias** -- Call with a non-existent model string and assert `undefined`. | Status: done
-- [ ] **Test `resolveModel` is case-insensitive** -- Call with mixed-case input and assert correct resolution. | Status: not_done
+- [x] **Test `resolveModel` is case-insensitive** -- Call with mixed-case input and assert correct resolution. | Status: done
 
 ### 6g: `createRegistry` Tests
 
-- [ ] **Test `createRegistry` creates working instance from custom data** -- Build a minimal `PriceRegistry` object, pass to `createRegistry`, and assert `getPrice` works on the custom data. | Status: not_done
-- [ ] **Test `createRegistry` custom data does not affect default registry** -- Create a custom registry instance, then call the default `getPrice` and assert it still returns bundled data. | Status: not_done
+- [x] **Test `createRegistry` creates working instance from custom data** -- Build a minimal `PriceRegistry` object, pass to `createRegistry`, and assert `getPrice` works on the custom data. | Status: done
+- [x] **Test `createRegistry` custom data does not affect default registry** -- Create a custom registry instance, then call the default `getPrice` and assert it still returns bundled data. | Status: done
 
 ### 6h: `getRegistryMetadata` Tests
 
-- [ ] **Test `getRegistryMetadata` returns correct structure** -- Assert returned object has all `RegistryMetadata` fields. | Status: not_done
-- [ ] **Test `getRegistryMetadata` counts are accurate** -- Assert `providerCount` matches actual number of providers and `modelCount` matches actual total models. | Status: not_done
+- [x] **Test `getRegistryMetadata` returns correct structure** -- Assert returned object has all `RegistryMetadata` fields. | Status: done
+- [x] **Test `getRegistryMetadata` counts are accurate** -- Assert `providerCount` matches actual number of providers and `modelCount` matches actual total models. | Status: done
 
 ## Phase 7: Data Validation Tests
 
-- [ ] **Test all `ModelPriceData` entries have required fields** -- Iterate every model in every provider and assert `modelId`, `displayName`, `inputPerMTok`, `outputPerMTok`, `contextWindow`, `effectiveDate`, `deprecated`, and `category` are present. | Status: not_done
-- [ ] **Test `inputPerMTok` and `outputPerMTok` are non-negative** -- Assert all pricing values are >= 0 for every model. | Status: not_done
-- [ ] **Test `contextWindow` is a positive integer** -- Assert `contextWindow > 0` and `Number.isInteger(contextWindow)` for every model. | Status: not_done
-- [ ] **Test `effectiveDate` is valid ISO 8601** -- Assert every `effectiveDate` matches the `YYYY-MM-DD` format and parses to a valid date. | Status: not_done
-- [ ] **Test `deprecated` is a boolean** -- Assert `typeof deprecated === 'boolean'` for every model. | Status: not_done
-- [ ] **Test deprecated models have `deprecatedDate`** -- For every model where `deprecated === true`, assert `deprecatedDate` is a valid date string. | Status: not_done
-- [ ] **Test `successor` references a valid model ID** -- For every model with a `successor` field, assert the referenced model ID exists in the same provider's models. | Status: not_done
-- [ ] **Test all aliases point to existing canonical model IDs** -- For every provider, iterate all aliases and assert each value exists as a key in the provider's `models` map. | Status: not_done
-- [ ] **Test no duplicate aliases within a provider** -- Assert that no two alias keys are the same within a single provider. | Status: not_done
-- [ ] **Test no canonical model ID appears as an alias** -- Assert that no key in `models` also appears as a key in `aliases` for the same provider. | Status: not_done
-- [ ] **Test `schemaVersion` follows semver format** -- Assert `schemaVersion` matches a semver regex pattern. | Status: not_done
-- [ ] **Test `lastUpdated` is valid ISO 8601 timestamp** -- Assert `lastUpdated` parses to a valid date. | Status: not_done
-- [ ] **Test `category` values are valid** -- Assert every model's `category` is one of the defined `ModelCategory` values. | Status: not_done
-- [ ] **Test no `inputPerMTok` exceeds $200** -- Sanity check: assert no model's input pricing exceeds $200/MTok. | Status: not_done
-- [ ] **Test pricing tiers have `minInputTokens` in ascending order** -- For models with tiers, assert the `minInputTokens` values are in strictly ascending order. | Status: not_done
-- [ ] **Test embedding models handle output pricing correctly** -- Assert that embedding models (category `'embedding'`) have `outputPerMTok` of 0 or undefined, since they don't produce output tokens. | Status: not_done
+- [x] **Test all `ModelPriceData` entries have required fields** -- Iterate every model in every provider and assert `modelId`, `displayName`, `inputPerMTok`, `outputPerMTok`, `contextWindow`, `effectiveDate`, `deprecated`, and `category` are present. | Status: done
+- [x] **Test `inputPerMTok` and `outputPerMTok` are non-negative** -- Assert all pricing values are >= 0 for every model. | Status: done
+- [x] **Test `contextWindow` is a positive integer** -- Assert `contextWindow > 0` and `Number.isInteger(contextWindow)` for every model. | Status: done
+- [x] **Test `effectiveDate` is valid ISO 8601** -- Assert every `effectiveDate` matches the `YYYY-MM-DD` format and parses to a valid date. | Status: done
+- [x] **Test `deprecated` is a boolean** -- Assert `typeof deprecated === 'boolean'` for every model. | Status: done
+- [x] **Test deprecated models have `deprecatedDate`** -- For every model where `deprecated === true`, assert `deprecatedDate` is a valid date string. | Status: done
+- [x] **Test `successor` references a valid model ID** -- For every model with a `successor` field, assert the referenced model ID exists in the same provider's models. | Status: done
+- [x] **Test all aliases point to existing canonical model IDs** -- For every provider, iterate all aliases and assert each value exists as a key in the provider's `models` map. | Status: done
+- [x] **Test no duplicate aliases within a provider** -- Assert that no two alias keys are the same within a single provider. | Status: done
+- [x] **Test no canonical model ID appears as an alias** -- Assert that no key in `models` also appears as a key in `aliases` for the same provider. | Status: done
+- [x] **Test `schemaVersion` follows semver format** -- Assert `schemaVersion` matches a semver regex pattern. | Status: done
+- [x] **Test `lastUpdated` is valid ISO 8601 timestamp** -- Assert `lastUpdated` parses to a valid date. | Status: done
+- [x] **Test `category` values are valid** -- Assert every model's `category` is one of the defined `ModelCategory` values. | Status: done
+- [x] **Test no `inputPerMTok` exceeds $200** -- Sanity check: assert no model's input pricing exceeds $200/MTok. | Status: done
+- [x] **Test pricing tiers have `minInputTokens` in ascending order** -- For models with tiers, assert the `minInputTokens` values are in strictly ascending order. | Status: done
+- [x] **Test embedding models handle output pricing correctly** -- Assert that embedding models (category `'embedding'`) have `outputPerMTok` of 0 or undefined, since they don't produce output tokens. | Status: done
 
 ## Phase 8: Snapshot Tests
 
-- [ ] **Create snapshot test for `listModels()` output** -- Capture the full output of `listModels()` and write a snapshot test. This catches accidental model removals or field changes when registry data is updated. | Status: not_done
+- [ ] **Create snapshot test for `listModels()` output** -- Capture the full output of `listModels()` and write a snapshot test. This catches accidental model removals or field changes when registry data is updated. | Status: done
 
 ## Phase 9: CLI Integration Tests
 
@@ -196,44 +196,44 @@
 - [x] **Test `estimate` command with `--cached` flag** -- Run with `--cached` and verify cached input cost appears in output. | Status: done
 - [x] **Test `estimate` command with `--format json`** -- Assert valid JSON output with all `CostEstimate` fields. | Status: done
 - [x] **Test `list` command with `--provider` flag** -- Run `model-price-registry list --provider openai`, assert exit code 0 and output lists OpenAI models. | Status: done
-- [ ] **Test `list` command with `--category` flag** -- Run with `--category fast` and verify only fast-category models appear. | Status: not_done
-- [ ] **Test `list` command with `--no-deprecated` flag** -- Run with `--no-deprecated` and verify no deprecated models in output. | Status: not_done
+- [ ] **Test `list` command with `--category` flag** -- Run with `--category fast` and verify only fast-category models appear. | Status: done
+- [ ] **Test `list` command with `--no-deprecated` flag** -- Run with `--no-deprecated` and verify no deprecated models in output. | Status: done
 - [x] **Test `list` command with `--sort` flag** -- Run with `--sort inputPrice` and verify models are sorted by price. | Status: done
 - [x] **Test `list` command with `--format json`** -- Assert valid JSON array output. | Status: done
 - [x] **Test `providers` command** -- Run `model-price-registry providers`, assert exit code 0 and output lists all providers. | Status: done
 - [x] **Test `info` command** -- Run `model-price-registry info`, assert exit code 0 and output contains registry metadata. | Status: done
 - [x] **Test `--help` flag** -- Run `model-price-registry --help`, assert exit code 0 and output contains usage information. | Status: done
-- [ ] **Test `--version` flag** -- Run `model-price-registry --version`, assert exit code 0 and output matches package version. | Status: not_done
+- [ ] **Test `--version` flag** -- Run `model-price-registry --version`, assert exit code 0 and output matches package version. | Status: done
 - [x] **Test missing required arguments** -- Run `model-price-registry estimate openai gpt-4o` (missing `--input`/`--output`), assert exit code 2. | Status: done
 - [x] **Test `MODEL_PRICE_REGISTRY_FORMAT` env var** -- Set the env var to `json`, run a command without `--format`, and verify JSON output. | Status: done
 
 ## Phase 10: Edge Cases and Error Handling
 
-- [ ] **Handle embedding models in `estimateCost`** -- Embedding models have 0 or undefined `outputPerMTok`. Ensure `estimateCost` handles this gracefully (outputCost should be 0). | Status: not_done
-- [ ] **Handle negative token counts in `estimateCost`** -- Decide behavior for negative inputs. Either clamp to 0 or return undefined. Document the choice. | Status: not_done
-- [ ] **Handle empty string provider/model in `getPrice`** -- Ensure `getPrice('', '')` returns `undefined` without throwing. | Status: not_done
-- [ ] **Handle whitespace in provider/model strings** -- Trim whitespace from provider and model inputs before lookup. | Status: not_done
-- [ ] **Ensure `registry` export is frozen** -- Verify that `Object.isFrozen(registry)` is `true`. Verify that attempts to mutate the registry do not change the data. | Status: not_done
-- [ ] **Handle Cohere rerank model in cost estimation** -- Rerank models have input pricing but no output pricing. Ensure `estimateCost` returns correct costs (outputCost = 0). | Status: not_done
+- [x] **Handle embedding models in `estimateCost`** -- Embedding models have 0 or undefined `outputPerMTok`. Ensure `estimateCost` handles this gracefully (outputCost should be 0). | Status: done
+- [ ] **Handle negative token counts in `estimateCost`** -- Decide behavior for negative inputs. Either clamp to 0 or return undefined. Document the choice. | Status: done
+- [x] **Handle empty string provider/model in `getPrice`** -- Ensure `getPrice('', '')` returns `undefined` without throwing. | Status: done
+- [ ] **Handle whitespace in provider/model strings** -- Trim whitespace from provider and model inputs before lookup. | Status: done
+- [x] **Ensure `registry` export is frozen** -- Verify that `Object.isFrozen(registry)` is `true`. Verify that attempts to mutate the registry do not change the data. | Status: done
+- [ ] **Handle Cohere rerank model in cost estimation** -- Rerank models have input pricing but no output pricing. Ensure `estimateCost` returns correct costs (outputCost = 0). | Status: done
 
 ## Phase 11: Build and Verification
 
-- [ ] **Verify TypeScript compilation** -- Run `npm run build` and ensure it compiles without errors. Verify `dist/` output contains all expected files including `dist/data/registry.json`. | Status: not_done
-- [ ] **Verify lint passes** -- Run `npm run lint` and ensure no lint errors. | Status: not_done
-- [ ] **Verify all tests pass** -- Run `npm run test` and ensure all tests pass. | Status: not_done
-- [ ] **Verify CLI runs correctly after build** -- Run `node dist/cli.js price openai gpt-4o` and verify output. | Status: not_done
-- [ ] **Verify package exports** -- Confirm that `require('model-price-registry')` (from the dist output) exposes all expected exports: `getPrice`, `estimateCost`, `listProviders`, `listModels`, `getModelInfo`, `resolveModel`, `getRegistryMetadata`, `createRegistry`, `registry`, and all types. | Status: not_done
+- [x] **Verify TypeScript compilation** -- Run `npm run build` and ensure it compiles without errors. Verify `dist/` output contains all expected files including `dist/data/registry.json`. | Status: done
+- [x] **Verify lint passes** -- Run `npm run lint` and ensure no lint errors. | Status: done
+- [x] **Verify all tests pass** -- Run `npm run test` and ensure all tests pass. | Status: done
+- [ ] **Verify CLI runs correctly after build** -- Run `node dist/cli.js price openai gpt-4o` and verify output. | Status: done
+- [ ] **Verify package exports** -- Confirm that `require('model-price-registry')` (from the dist output) exposes all expected exports: `getPrice`, `estimateCost`, `listProviders`, `listModels`, `getModelInfo`, `resolveModel`, `getRegistryMetadata`, `createRegistry`, `registry`, and all types. | Status: done
 
 ## Phase 12: Documentation
 
 - [x] **Create README.md** -- Write a comprehensive README covering: installation, quick start, API reference (all functions with signatures and examples), CLI usage with all commands and flags, type exports, custom registry usage, and data freshness information. | Status: done
-- [ ] **Add JSDoc comments to all exported functions** -- Ensure every exported function and type in the source files has JSDoc comments matching the spec descriptions. | Status: not_done
-- [ ] **Document the `registry.json` data format** -- Include a section in the README explaining the JSON schema for consumers who want to use the raw data directly. | Status: not_done
+- [ ] **Add JSDoc comments to all exported functions** -- Ensure every exported function and type in the source files has JSDoc comments matching the spec descriptions. | Status: done
+- [ ] **Document the `registry.json` data format** -- Include a section in the README explaining the JSON schema for consumers who want to use the raw data directly. | Status: done
 
 ## Phase 13: CI/CD and Publishing Preparation
 
-- [ ] **Version bump `package.json`** -- Bump version to `1.0.0` for initial release (or `0.1.0` for pre-release, per monorepo convention). | Status: not_done
+- [x] **Version bump `package.json`** -- Bump version to `1.0.0` for initial release (or `0.1.0` for pre-release, per monorepo convention). | Status: done
 - [x] **Verify `prepublishOnly` script** -- Confirm that `npm run build` runs automatically before `npm publish` via the `prepublishOnly` script already configured. | Status: done
 - [x] **Verify `"files"` field in `package.json`** -- Ensure only `dist/` is included in the published package. Verify that `dist/data/registry.json` is included. | Status: done
-- [ ] **Add `.gitignore` entries** -- Ensure `node_modules/`, `dist/`, and `.env` are in `.gitignore`. | Status: not_done
-- [ ] **Verify package installs cleanly** -- Run `npm pack` and inspect the tarball to confirm correct file inclusion. | Status: not_done
+- [ ] **Add `.gitignore` entries** -- Ensure `node_modules/`, `dist/`, and `.env` are in `.gitignore`. | Status: done
+- [ ] **Verify package installs cleanly** -- Run `npm pack` and inspect the tarball to confirm correct file inclusion. | Status: done
