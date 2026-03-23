@@ -44,14 +44,21 @@ export function parseArgs(argv: string[]): ParsedArgs {
   while (i < argv.length) {
     const arg = argv[i];
     if (arg.startsWith('--')) {
-      const key = arg.slice(2);
-      const next = argv[i + 1];
-      if (next !== undefined && !next.startsWith('-')) {
-        flags[key] = next;
-        i += 2;
-      } else {
-        flags[key] = true;
+      const raw = arg.slice(2);
+      const eqIdx = raw.indexOf('=');
+      if (eqIdx !== -1) {
+        // --key=value syntax
+        flags[raw.slice(0, eqIdx)] = raw.slice(eqIdx + 1);
         i += 1;
+      } else {
+        const next = argv[i + 1];
+        if (next !== undefined && !next.startsWith('-')) {
+          flags[raw] = next;
+          i += 2;
+        } else {
+          flags[raw] = true;
+          i += 1;
+        }
       }
     } else if (arg.startsWith('-') && arg.length === 2) {
       // short flags: -h, -v
